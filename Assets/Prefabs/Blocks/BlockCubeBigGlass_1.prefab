@@ -123,4 +123,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDurability: 5
   awardPoints: 5
+  spriteRenderer: {fileID: 6433885229734895343}
   damagedSprite: {fileID: 21300000, guid: 960f1b7aafef624439a3bb9c6764c66b, type: 3}

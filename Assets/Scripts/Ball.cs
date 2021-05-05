@@ -9,18 +9,12 @@ public class Ball : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Transform padTransform;
 
-    private Vector2 directionWithOffset;
     private bool isStarted;
 
     #endregion
 
 
     #region Unity lifecycle
-
-    private void Start()
-    {
-        directionWithOffset = new Vector2(Random.Range(-0.5f, 0.5f), 1f);
-    }
 
     private void Update()
     {
@@ -33,19 +27,20 @@ public class Ball : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                PushBall();
+                LaunchBall();
             }
         }
     }
 
     #endregion
-    
+
 
     #region Private methods
 
-    private void PushBall()
+    private void LaunchBall()
     {
-        Vector2 forceDirection = directionWithOffset * speed;
+        Vector2 directionWithRandom = new Vector2(Random.Range(-0.5f, 0.5f), 1f).normalized;
+        Vector2 forceDirection = directionWithRandom * speed;
         rigidBody2D.AddForce(forceDirection);
         isStarted = true;
     }

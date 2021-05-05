@@ -4,26 +4,33 @@ public class Block : MonoBehaviour
 {
     #region Variables
 
-    public delegate void OnDestroyBlockDelegate(int rewardPoints);
-
-    public static event OnDestroyBlockDelegate OnDestroyBlock;
-
+    [Header("Settings")]
     [SerializeField] [Min(0)] private int maxDurability;
     [SerializeField] [Min(0)] private int awardPoints;
+
+    [Header("Sprite Settings")] 
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite damagedSprite;
 
-    private SpriteRenderer spriteRenderer;
+    private bool isDamaged;
     private int currentDurability;
 
     #endregion
 
 
-    #region Unity lifecycle
+    #region Events
 
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+    public delegate void OnDestroyBlockDelegate(int rewardPoints);
+
+    public static event OnDestroyBlockDelegate OnDestroyBlock;
+
+    //уточнить, как правильно Action использовать в качестве альтернативы delegate
+    //public static event Action<int> OnDestroyBlock1;
+
+    #endregion
+
+
+    #region Unity lifecycle
 
     private void Start()
     {
@@ -36,13 +43,14 @@ public class Block : MonoBehaviour
 
         if (currentDurability < maxDurability)
         {
+            isDamaged = true;
             SetDamagedSprite();
-        }
-
-        if (currentDurability == 0)
-        {
-            OnDestroyBlock?.Invoke(awardPoints);
-            Destruct();
+            
+            if (currentDurability == 0)
+            {
+                OnDestroyBlock?.Invoke(awardPoints);
+                Destruct();
+            }
         }
     }
 
@@ -59,6 +67,7 @@ public class Block : MonoBehaviour
     private void RestoreDurability()
     {
         currentDurability = maxDurability;
+        isDamaged = false;
     }
 
     private void SetDamagedSprite()

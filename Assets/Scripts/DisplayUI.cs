@@ -10,19 +10,19 @@ public class DisplayUI : MonoBehaviour
     [Min(0)] private int currentPoints;
 
     #endregion
-    
+
 
     #region Unity lifecycle
-
-    private void OnEnable()
-    {
-        Block.OnDestroyBlock += AddPoints;
-    }
 
     private void Start()
     {
         currentPoints = 0;
-        pointsText.text = currentPoints.ToString();
+        UpdatePointsLabel();
+    }
+
+    private void OnEnable()
+    {
+        Block.OnDestroyBlock += AddPoints;
     }
 
     private void OnDisable()
@@ -38,6 +38,10 @@ public class DisplayUI : MonoBehaviour
     private void AddPoints(int pointsToAdd)
     {
         currentPoints += pointsToAdd;
+    }
+
+    private void UpdatePointsLabel()
+    {
         pointsText.text = currentPoints.ToString();
     }
 

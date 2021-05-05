@@ -7,7 +7,7 @@ public class KillZone : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Ball"))
+        if (other.gameObject.CompareTag(Tags.Ball))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

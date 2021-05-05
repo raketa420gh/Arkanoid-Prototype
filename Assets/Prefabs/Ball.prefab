@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 715062b34f22478469504582e9b6306d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody2D: {fileID: 0}
-  speed: 0
-  padTransform: {fileID: 0}
+  rigidBody2D: {fileID: 3258563936012947819}
+  speed: 420
+  padTransform: {fileID: 4567872138896085941, guid: b317f2b9fadc04846a561774d924e347,
+    type: 3}

@@ -130,4 +130,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDurability: 2
   awardPoints: 2
+  spriteRenderer: {fileID: 8280230841580041026}
   damagedSprite: {fileID: 21300000, guid: bd3493886dd2cee4f91a3dfeae71a6d5, type: 3}
