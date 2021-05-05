@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Block : MonoBehaviour
 {
@@ -19,13 +20,8 @@ public class Block : MonoBehaviour
 
 
     #region Events
-
-    public delegate void OnDestroyBlockDelegate(int rewardPoints);
-
-    public static event OnDestroyBlockDelegate OnDestroyBlock;
-
-    //уточнить, как правильно Action использовать в качестве альтернативы delegate
-    //public static event Action<int> OnDestroyBlock1;
+    
+    public static event Action<int> OnDestroyBlock;
 
     #endregion
 

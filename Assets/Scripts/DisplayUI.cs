@@ -38,6 +38,7 @@ public class DisplayUI : MonoBehaviour
     private void AddPoints(int pointsToAdd)
     {
         currentPoints += pointsToAdd;
+        UpdatePointsLabel();
     }
 
     private void UpdatePointsLabel()
