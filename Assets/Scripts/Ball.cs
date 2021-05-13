@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Ball : MonoBehaviour
@@ -6,23 +7,44 @@ public class Ball : MonoBehaviour
     #region Variables
 
     [SerializeField] private Rigidbody2D rigidBody2D;
-    [SerializeField] private float speed;
     [SerializeField] private Transform padTransform;
+    [SerializeField] private float speed;
 
-    private bool isStarted;
+    private bool isLaunched;
 
     #endregion
 
 
     #region Unity lifecycle
 
+    private void Start()
+    {
+        if (GameManager.Instance.IsAutoPlayOn)
+        {
+            LaunchBall();
+        }
+    }
+
+    private void OnEnable()
+    {
+        GameManager.OnGameStarted += ResetBall;
+        GameManager.OnGameStarted += Start;
+        KillZone.OnBallEnterKillZone += ResetBall;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStarted -= ResetBall;
+        GameManager.OnGameStarted -= Start;
+        KillZone.OnBallEnterKillZone -= ResetBall;
+    }
+
     private void Update()
     {
-        if (!isStarted)
+        if (!isLaunched)
         {
             Vector3 padPosition = padTransform.position;
             padPosition.y = transform.position.y;
-
             transform.position = padPosition;
 
             if (Input.GetMouseButtonDown(0))
@@ -37,12 +59,19 @@ public class Ball : MonoBehaviour
 
     #region Private methods
 
+    private void ResetBall()
+    {
+        transform.position = new Vector3(padTransform.position.x, padTransform.position.y + 0.75f, 0f);
+        rigidBody2D.velocity = Vector2.zero;
+        isLaunched = false;
+    }
+
     private void LaunchBall()
     {
         Vector2 directionWithRandom = new Vector2(Random.Range(-0.5f, 0.5f), 1f).normalized;
         Vector2 forceDirection = directionWithRandom * speed;
         rigidBody2D.AddForce(forceDirection);
-        isStarted = true;
+        isLaunched = true;
     }
 
     #endregion

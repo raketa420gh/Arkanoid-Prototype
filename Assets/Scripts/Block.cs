@@ -5,23 +5,27 @@ public class Block : MonoBehaviour
 {
     #region Variables
 
-    [Header("Settings")]
+    [Header("Settings")] 
     [SerializeField] [Min(0)] private int maxDurability;
+
     [SerializeField] [Min(0)] private int awardPoints;
+    [SerializeField] private bool isInvisibleAtStart;
 
     [Header("Sprite Settings")] 
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite damagedSprite;
 
     private bool isDamaged;
+    private bool canDamaged = true;
     private int currentDurability;
 
     #endregion
 
 
     #region Events
-    
-    public static event Action<int> OnDestroyBlock;
+
+    public static event Action OnDestroyed;
+    public static event Action OnCreated;
 
     #endregion
 
@@ -31,22 +35,26 @@ public class Block : MonoBehaviour
     private void Start()
     {
         RestoreDurability();
+
+        if (isInvisibleAtStart)
+        {
+            SetVisibility(false);
+            canDamaged = false;
+        }
+        
+        OnCreated?.Invoke();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        currentDurability--;
-
-        if (currentDurability < maxDurability)
+        if (canDamaged)
         {
-            isDamaged = true;
-            SetDamagedSprite();
-            
-            if (currentDurability == 0)
-            {
-                OnDestroyBlock?.Invoke(awardPoints);
-                Destruct();
-            }
+            ReduceDurability();
+        }
+        else
+        {
+            SetVisibility(true);
+            canDamaged = true;
         }
     }
 
@@ -55,9 +63,20 @@ public class Block : MonoBehaviour
 
     #region Private Methods
 
-    private void Destruct()
+    private void ReduceDurability()
     {
-        Destroy(gameObject);
+        currentDurability--;
+
+        if (currentDurability < maxDurability)
+        {
+            isDamaged = true;
+            SetDamagedSprite();
+
+            if (currentDurability <= 0)
+            {
+                DestroyBlock();
+            }
+        }
     }
 
     private void RestoreDurability()
@@ -69,6 +88,18 @@ public class Block : MonoBehaviour
     private void SetDamagedSprite()
     {
         spriteRenderer.sprite = damagedSprite;
+    }
+
+    private void SetVisibility(bool isVisible)
+    {
+        spriteRenderer.color = isVisible ? Color.white : Color.clear;
+    }
+
+    private void DestroyBlock()
+    {
+        GameManager.Instance.TotalPoints += awardPoints;
+        Destroy(gameObject);
+        OnDestroyed?.Invoke();
     }
 
     #endregion
