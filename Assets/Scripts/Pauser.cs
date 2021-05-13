@@ -20,26 +20,33 @@ public class Pauser : MonoBehaviour
 
     #region Unity lifecycle
 
+    private void Start()
+    {
+        TogglePause(false);
+    }
+
     private void OnEnable()
     {
-        GameManager.OnGameStarted += Start;
+        GameManager.OnAllBlocksDestroyed += PauseOn;
     }
 
     private void OnDisable()
     {
-        GameManager.OnGameStarted -= Start;
-    }
-
-    private void Start()
-    {
-        TogglePause(false);
+        GameManager.OnAllBlocksDestroyed -= PauseOn;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TogglePause(!IsPaused);
+            if (IsPaused)
+            {
+                TogglePause(false);
+            }
+            else
+            {
+                TogglePause(true);
+            }
         }
     }
 
@@ -63,6 +70,16 @@ public class Pauser : MonoBehaviour
                 OnGameUnpaused?.Invoke();
                 break;
         }
+    }
+
+    #endregion
+
+
+    #region Private methods
+
+    private void PauseOn()
+    {
+        TogglePause(true);
     }
 
     #endregion

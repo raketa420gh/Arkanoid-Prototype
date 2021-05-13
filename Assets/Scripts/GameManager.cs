@@ -19,9 +19,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
 
     #region Events
-
-    public static event Action OnGameStarted;
+    
     public static event Action OnGameOvered;
+    public static event Action OnLevelRestarted;
+
+    public static event Action OnAllBlocksDestroyed;
+
+    public static event Action OnLifesChanged;
 
     #endregion
 
@@ -40,22 +44,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void Start()
     {
-        RestoreLives();
+        RestoreLifes();
         BuckOffPoints();
-        OnGameStarted?.Invoke();
     }
 
     private void OnEnable()
     {
-        Block.OnCreated += CalculateAllBlocks;
-        Block.OnDestroyed += ReduceBlocksCount;
+        Block.OnCreated += AddAllBlocksAmount;
+        Block.OnDestroyed += ReduceAllBlocksCount;
         KillZone.OnBallEnterKillZone += ReduceLive;
     }
 
     private void OnDisable()
     {
-        Block.OnCreated -= CalculateAllBlocks;
-        Block.OnDestroyed -= ReduceBlocksCount;
+        Block.OnCreated -= AddAllBlocksAmount;
+        Block.OnDestroyed -= ReduceAllBlocksCount;
         KillZone.OnBallEnterKillZone -= ReduceLive;
     }
 
@@ -66,14 +69,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             return;
         }
 
-        if (!Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            return;
-        }
-        
-        if (CurrentLifes < maxLifes)
-        {
-            CurrentLifes++;
+            if (CurrentLifes < maxLifes)
+            {
+                CurrentLifes++;
+                OnLifesChanged?.Invoke();
+            }
         }
     }
 
@@ -88,15 +90,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Start();
     }
 
-    public void StartMainMenuLevel()
+    public void StartMainMenuScene()
     {
         SceneManager.LoadScene(0);
-        OnGameStarted?.Invoke();
+        Start();
     }
     
     public void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        OnLevelRestarted?.Invoke();
     }
 
     public void ExitGame()
@@ -121,7 +124,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
 
-    private void RestoreLives()
+    private void RestoreLifes()
     {
         CurrentLifes = maxLifes;
     }
@@ -132,13 +135,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
 
 
-    private void CalculateAllBlocks()
+    private void AddAllBlocksAmount()
     {
         allBlocksCount++;
         Debug.Log($"Блок создан. Теперь на сцене {allBlocksCount} блоков");
     }
 
-    private void ReduceBlocksCount()
+    private void ReduceAllBlocksCount()
     {
         allBlocksCount -= 1;
         Debug.Log($"Уничтожен блок. Осталось = {allBlocksCount}");
@@ -146,6 +149,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (allBlocksCount <= 0)
         {
             allBlocksCount = 0;
+            OnAllBlocksDestroyed?.Invoke();
             LoadNextScene();
         }
     }

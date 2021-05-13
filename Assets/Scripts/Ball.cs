@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Ball : MonoBehaviour
@@ -19,6 +18,8 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
+        ResetBall();
+        
         if (GameManager.Instance.IsAutoPlayOn)
         {
             LaunchBall();
@@ -27,15 +28,11 @@ public class Ball : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.OnGameStarted += ResetBall;
-        GameManager.OnGameStarted += Start;
         KillZone.OnBallEnterKillZone += ResetBall;
     }
 
     private void OnDisable()
     {
-        GameManager.OnGameStarted -= ResetBall;
-        GameManager.OnGameStarted -= Start;
         KillZone.OnBallEnterKillZone -= ResetBall;
     }
 

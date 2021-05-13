@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UserInterfaceView : MonoBehaviour
@@ -34,8 +33,9 @@ public class UserInterfaceView : MonoBehaviour
     {
         Block.OnDestroyed += UpdatePointsLabel;
         KillZone.OnBallEnterKillZone += UpdateLivesLabel;
-        GameManager.OnGameStarted += Start;
         GameManager.OnGameOvered += GameOverHandler;
+        GameManager.OnLevelRestarted += LevelRestartHandler;
+        GameManager.OnLifesChanged += UpdateLivesLabel;
         Pauser.OnGamePaused += ShowPausePanel;
         Pauser.OnGameUnpaused += HidePausePanel;
     }
@@ -44,8 +44,9 @@ public class UserInterfaceView : MonoBehaviour
     {
         Block.OnDestroyed -= UpdatePointsLabel;
         KillZone.OnBallEnterKillZone -= UpdateLivesLabel;
-        GameManager.OnGameStarted -= Start;
         GameManager.OnGameOvered -= GameOverHandler;
+        GameManager.OnLevelRestarted -= LevelRestartHandler;
+        GameManager.OnLifesChanged -= UpdateLivesLabel;
         Pauser.OnGamePaused -= ShowPausePanel;
         Pauser.OnGameUnpaused -= HidePausePanel;
     }
@@ -114,6 +115,13 @@ public class UserInterfaceView : MonoBehaviour
     {
         ShowGameOverPanel();
         UpdateTotalPointsLabel();
+    }
+
+    private void LevelRestartHandler()
+    {
+        UpdatePointsLabel();
+        UpdateLivesLabel();
+        HideGameOverPanel();
     }
 
     #endregion

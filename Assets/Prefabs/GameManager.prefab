@@ -361,7 +361,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2301839014319441630}
-        m_MethodName: StartMainMenuLevel
+        m_MethodName: StartMainMenuScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -987,7 +987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3237194935118066188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1044,7 +1044,7 @@ RectTransform:
   - {fileID: 8868989599121086039}
   - {fileID: 4717141962777520377}
   m_Father: {fileID: 7520867670992424207}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.514151, b: 0.514151, a: 0.78431374}
+  m_Color: {r: 1, g: 0.514151, b: 0.514151, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1351,8 +1351,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 7520867670748111328}
-  - {fileID: 266859422409349492}
   - {fileID: 1259308492970231869}
+  - {fileID: 266859422409349492}
   - {fileID: 3237194935118066188}
   m_Father: {fileID: 3679282691386527061}
   m_RootOrder: 1
@@ -1766,7 +1766,7 @@ RectTransform:
   - {fileID: 7829830541051172829}
   - {fileID: 4858942089736860877}
   m_Father: {fileID: 7520867670992424207}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
