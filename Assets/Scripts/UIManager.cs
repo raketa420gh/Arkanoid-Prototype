@@ -36,8 +36,8 @@ public class UserInterfaceView : MonoBehaviour
         GameManager.OnGameOvered += GameOverHandler;
         GameManager.OnLevelRestarted += LevelRestartHandler;
         GameManager.OnLifesChanged += UpdateLivesLabel;
-        Pauser.OnGamePaused += ShowPausePanel;
-        Pauser.OnGameUnpaused += HidePausePanel;
+        PauseManager.OnGamePaused += ShowPausePanel;
+        PauseManager.OnGameUnpaused += HidePausePanel;
     }
 
     private void OnDisable()
@@ -47,8 +47,8 @@ public class UserInterfaceView : MonoBehaviour
         GameManager.OnGameOvered -= GameOverHandler;
         GameManager.OnLevelRestarted -= LevelRestartHandler;
         GameManager.OnLifesChanged -= UpdateLivesLabel;
-        Pauser.OnGamePaused -= ShowPausePanel;
-        Pauser.OnGameUnpaused -= HidePausePanel;
+        PauseManager.OnGamePaused -= ShowPausePanel;
+        PauseManager.OnGameUnpaused -= HidePausePanel;
     }
 
     #endregion
@@ -98,7 +98,7 @@ public class UserInterfaceView : MonoBehaviour
 
     private void UpdateLivesLabel()
     {
-        livesText.text = $"Жизни: {GameManager.Instance.CurrentLifes.ToString()}";
+        livesText.text = $"Жизни: {GameManager.Instance.CurrentLifePoints.ToString()}";
     }
 
     private void UpdateTotalPointsLabel()

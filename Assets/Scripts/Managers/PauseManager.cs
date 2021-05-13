@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Pauser : MonoBehaviour
+public class PauseManager : MonoBehaviour
 {
     #region Properties
 
@@ -23,16 +23,6 @@ public class Pauser : MonoBehaviour
     private void Start()
     {
         TogglePause(false);
-    }
-
-    private void OnEnable()
-    {
-        GameManager.OnAllBlocksDestroyed += PauseOn;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnAllBlocksDestroyed -= PauseOn;
     }
 
     private void Update()
