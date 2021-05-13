@@ -9,7 +9,7 @@ public class Pad : MonoBehaviour
     [SerializeField] private float maxX;
     
     private Ball ball;
-    private Pauser pauser;
+    private PauseManager pauseManager;
 
     #endregion
 
@@ -19,12 +19,12 @@ public class Pad : MonoBehaviour
     private void Start()
     {
         ball = FindObjectOfType<Ball>();
-        pauser = FindObjectOfType<Pauser>();
+        pauseManager = FindObjectOfType<PauseManager>();
     }
 
     private void Update()
     {
-        if (pauser.IsPaused)
+        if (pauseManager.IsPaused)
         {
             return;
         }

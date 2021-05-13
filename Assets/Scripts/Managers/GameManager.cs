@@ -9,8 +9,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     [Header("Other Managers")]
     [SerializeField] private LevelManager levelManager;
-    [SerializeField] private UIManager uiManager;
     [SerializeField] private PauseManager pauseManager;
+    [SerializeField] private UIManager uiManager;
     
     [Header("Dev Only")]
     [SerializeField] private bool isAutoPlayOn;
@@ -39,12 +39,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void OnEnable()
     {
+        Block.OnDestroyed += BlockOnDestroyed;
         KillZone.OnBallEntered += KillZoneOnBallEntered;
         LevelManager.OnAllBlocksDestroyed += LevelManagerOnAllBlocksDestroyed;
     }
 
     private void OnDisable()
     {
+        Block.OnDestroyed -= BlockOnDestroyed;
         KillZone.OnBallEntered -= KillZoneOnBallEntered;
         LevelManager.OnAllBlocksDestroyed -= LevelManagerOnAllBlocksDestroyed;
     }
@@ -70,10 +72,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void ReduceLive()
     {
-        if (CurrentLifePoints > 0)
+        if (CurrentLifePoints > 1)
         {
             CurrentLifePoints--;
-            uiManager.UpdatePointsLabel(CurrentLifePoints);
+            uiManager.UpdateLifePointsLabel(CurrentLifePoints);
         }
         else
         {
@@ -107,6 +109,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void LevelManagerOnAllBlocksDestroyed()
     {
         levelManager.LoadNextScene();
+    }
+
+    private void BlockOnDestroyed(int awardPoints)
+    {
+        TotalPoints += awardPoints;
+        uiManager.UpdatePointsLabel(TotalPoints);
     }
 
     #endregion

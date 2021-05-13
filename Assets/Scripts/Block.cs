@@ -24,7 +24,7 @@ public class Block : MonoBehaviour
 
     #region Events
 
-    public static event Action OnDestroyed;
+    public static event Action<int> OnDestroyed;
     public static event Action OnCreated;
 
     #endregion
@@ -97,9 +97,8 @@ public class Block : MonoBehaviour
 
     private void DestroyBlock()
     {
-        GameManager.Instance.TotalPoints += awardPoints;
         Destroy(gameObject);
-        OnDestroyed?.Invoke();
+        OnDestroyed?.Invoke(awardPoints);
     }
 
     #endregion

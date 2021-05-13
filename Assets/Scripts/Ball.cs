@@ -28,12 +28,12 @@ public class Ball : MonoBehaviour
 
     private void OnEnable()
     {
-        KillZone.OnBallEnterKillZone += ResetBall;
+        KillZone.OnBallEntered += ResetBall;
     }
 
     private void OnDisable()
     {
-        KillZone.OnBallEnterKillZone -= ResetBall;
+        KillZone.OnBallEntered -= ResetBall;
     }
 
     private void Update()
@@ -54,15 +54,20 @@ public class Ball : MonoBehaviour
     #endregion
 
 
-    #region Private methods
+    #region Public methods
 
-    private void ResetBall()
+    public void ResetBall()
     {
         transform.position = new Vector3(padTransform.position.x, padTransform.position.y + 0.75f, 0f);
         rigidBody2D.velocity = Vector2.zero;
         isLaunched = false;
     }
 
+    #endregion
+
+
+    #region Private methods
+    
     private void LaunchBall()
     {
         Vector2 directionWithRandom = new Vector2(Random.Range(-0.5f, 0.5f), 1f).normalized;

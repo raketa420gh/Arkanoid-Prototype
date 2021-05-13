@@ -10,9 +10,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text livesText;
     [SerializeField] private Text totalPointsText;
 
-    [Header("Panels")] 
-    [SerializeField] private GameObject gameOverPanel;
+    [Header("Panels")]
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject mainMenuPanel;
     
 
@@ -24,19 +24,17 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         HideGameOverPanel();
-        HidePausePanel();
+        PausePanelVision(false);
     }
 
     private void OnEnable()
     {
-        PauseManager.OnGamePaused += ShowPausePanel;
-        PauseManager.OnGameUnpaused += HidePausePanel;
+        PauseManager.OnGamePausedOn += PauseManagerOnGamePausedOn;
     }
 
     private void OnDisable()
     {
-        PauseManager.OnGamePaused -= ShowPausePanel;
-        PauseManager.OnGameUnpaused -= HidePausePanel;
+        PauseManager.OnGamePausedOn -= PauseManagerOnGamePausedOn;
     }
 
     #endregion
@@ -64,14 +62,9 @@ public class UIManager : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    public void ShowPausePanel()
+    public void PausePanelVision(bool isActive)
     {
-        pausePanel.SetActive(true);
-    }
-
-    public void HidePausePanel()
-    {
-        pausePanel.SetActive(false);
+        pausePanel.SetActive(isActive);
     }
     
     public void UpdatePointsLabel(int points)
@@ -87,6 +80,16 @@ public class UIManager : MonoBehaviour
     public void UpdateTotalPointsLabel(int totalPoints)
     {
         totalPointsText.text = $"Всего заработано очков = {totalPoints}";
+    }
+
+    #endregion
+
+
+    #region Event Handlers
+
+    private void PauseManagerOnGamePausedOn(bool isActive)
+    {
+        PausePanelVision(isActive);
     }
 
     #endregion

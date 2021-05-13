@@ -6,7 +6,9 @@ public class LevelManager : MonoBehaviour
 {
     #region Variables
 
-    [SerializeField] private Ball ball;
+    
+    private UIManager uiManager;
+    private Ball ball;
     
     private int allBlocksCount;
 
@@ -25,6 +27,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         ball = FindObjectOfType<Ball>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     private void OnEnable()
@@ -55,6 +58,11 @@ public class LevelManager : MonoBehaviour
         {
             SceneManager.LoadScene(currentSceneIndex + 1);
         }
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     #endregion

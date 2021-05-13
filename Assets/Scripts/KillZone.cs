@@ -6,7 +6,7 @@ public class KillZone : MonoBehaviour
 {
     #region Events
 
-    public static event Action OnBallEnterKillZone;
+    public static event Action OnBallEntered;
 
     #endregion
 
@@ -17,7 +17,7 @@ public class KillZone : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Tags.Ball))
         {
-            OnBallEnterKillZone?.Invoke();
+            OnBallEntered?.Invoke();
         }
     }
 
