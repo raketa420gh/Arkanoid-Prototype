@@ -12,7 +12,7 @@ public class PauseManager : MonoBehaviour
 
     #region Events
 
-    public static event Action<bool> OnGamePausedOn;
+    public static event Action<bool> OnPausedOn;
 
     #endregion
 
@@ -49,7 +49,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = isActive ? 0f : 1f;
 
         IsPaused = isActive;
-        OnGamePausedOn?.Invoke(isActive);
+        OnPausedOn?.Invoke(isActive);
     }
 
     #endregion

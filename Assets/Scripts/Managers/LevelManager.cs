@@ -6,10 +6,8 @@ public class LevelManager : MonoBehaviour
 {
     #region Variables
 
-    
-    private UIManager uiManager;
-    private Ball ball;
-    
+    [SerializeField] private Ball ball;
+
     private int allBlocksCount;
 
     #endregion
@@ -20,15 +18,9 @@ public class LevelManager : MonoBehaviour
     public static event Action OnAllBlocksDestroyed;
 
     #endregion
-    
-    
-    #region Unity lifecycle
 
-    private void Awake()
-    {
-        ball = FindObjectOfType<Ball>();
-        uiManager = FindObjectOfType<UIManager>();
-    }
+
+    #region Unity lifecycle
 
     private void OnEnable()
     {
@@ -45,9 +37,14 @@ public class LevelManager : MonoBehaviour
     }
 
     #endregion
-    
+
 
     #region Public methods
+
+    public void OpenScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
 
     public void LoadNextScene()
     {
@@ -69,7 +66,7 @@ public class LevelManager : MonoBehaviour
 
 
     #region Event Handlers
-    
+
     private void KillZoneOnBallEntered()
     {
         ball.ResetBall();
@@ -78,21 +75,21 @@ public class LevelManager : MonoBehaviour
     private void BlockOnCreated()
     {
         allBlocksCount++;
-        
+
         Debug.Log($"Блок создан. На сцене {allBlocksCount} блоков");
     }
-    
+
     private void BlockOnDestroyed(int awardPoints)
     {
         allBlocksCount--;
-        
+
         if (allBlocksCount <= 0)
         {
             allBlocksCount = 0;
             LoadNextScene();
             OnAllBlocksDestroyed?.Invoke();
         }
-        
+
         Debug.Log($"Блок уничтожен. На сцене {allBlocksCount} блоков");
     }
 

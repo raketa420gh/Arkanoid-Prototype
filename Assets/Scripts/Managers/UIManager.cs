@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject topPanel;
     
 
     #endregion
@@ -23,18 +24,20 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        HideGameOverPanel();
+        GameOverPanelVision(false);
+        TopPanelVision(true);
         PausePanelVision(false);
+        
     }
 
     private void OnEnable()
     {
-        PauseManager.OnGamePausedOn += PauseManagerOnGamePausedOn;
+        PauseManager.OnPausedOn += PauseManagerOnPausedOn;
     }
 
     private void OnDisable()
     {
-        PauseManager.OnGamePausedOn -= PauseManagerOnGamePausedOn;
+        PauseManager.OnPausedOn -= PauseManagerOnPausedOn;
     }
 
     #endregion
@@ -42,29 +45,24 @@ public class UIManager : MonoBehaviour
 
     #region Public methods
 
-    public void ShowMainMenuPanel()
+    public void TopPanelVision(bool isActive)
     {
-        mainMenuPanel.SetActive(true);
+        topPanel.SetActive(isActive);
     }
 
-    public void HideMainMenuPanel()
+    public void GameOverPanelVision(bool isActive)
     {
-        mainMenuPanel.SetActive(false);
-    }
-
-    public void HideGameOverPanel()
-    {
-        gameOverPanel.SetActive(false);
-    }
-    
-    public void ShowGameOverPanel()
-    {
-        gameOverPanel.SetActive(true);
+        gameOverPanel.SetActive(isActive);
     }
 
     public void PausePanelVision(bool isActive)
     {
         pausePanel.SetActive(isActive);
+    }
+
+    public void HideMainMenuPanel()
+    {
+        mainMenuPanel.SetActive(false);
     }
     
     public void UpdatePointsLabel(int points)
@@ -87,7 +85,7 @@ public class UIManager : MonoBehaviour
 
     #region Event Handlers
 
-    private void PauseManagerOnGamePausedOn(bool isActive)
+    private void PauseManagerOnPausedOn(bool isActive)
     {
         PausePanelVision(isActive);
     }

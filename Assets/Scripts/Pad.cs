@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Pad : MonoBehaviour
 {
     #region Variables
 
-    [Header("Movement Limit")]
+    [Header("Movement Limit")] 
     [SerializeField] private float minX;
     [SerializeField] private float maxX;
-    
+
+    private bool isControlOn;
     private Ball ball;
-    private PauseManager pauseManager;
 
     #endregion
 
@@ -19,16 +20,21 @@ public class Pad : MonoBehaviour
     private void Start()
     {
         ball = FindObjectOfType<Ball>();
-        pauseManager = FindObjectOfType<PauseManager>();
+        isControlOn = true;
+    }
+
+    private void OnEnable()
+    {
+        PauseManager.OnPausedOn += PauseManagerOnPausedOn;
     }
 
     private void Update()
     {
-        if (pauseManager.IsPaused)
+        if (!isControlOn)
         {
             return;
         }
-            
+
         if (GameManager.Instance.IsAutoPlayOn)
         {
             Vector3 padPosition = ball.transform.position;
@@ -47,6 +53,16 @@ public class Pad : MonoBehaviour
             padPosition.z = 0f;
             transform.position = padPosition;
         }
+    }
+
+    #endregion
+
+
+    #region Event Handlers
+
+    private void PauseManagerOnPausedOn(bool isActive)
+    {
+        isControlOn = !isActive;
     }
 
     #endregion

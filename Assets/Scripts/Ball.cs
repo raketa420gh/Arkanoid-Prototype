@@ -4,11 +4,14 @@ using Random = UnityEngine.Random;
 public class Ball : MonoBehaviour
 {
     #region Variables
-
+    
+    [Header("Components")]
     [SerializeField] private Rigidbody2D rigidBody2D;
     [SerializeField] private Transform padTransform;
+    
+    [Header("Ball Settings")]
     [SerializeField] private float speed;
-
+    
     private bool isLaunched;
 
     #endregion

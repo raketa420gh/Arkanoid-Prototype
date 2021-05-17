@@ -121,7 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38311dd0c1a62764b9450905b9b87d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDurability: 3
+  maxDurability: 2
   awardPoints: 3
+  isInvisibleAtStart: 0
   spriteRenderer: {fileID: 8280230841580041026}
   damagedSprite: {fileID: 21300000, guid: 106e4120d7bd2ad49b53b3c85cb5d121, type: 3}

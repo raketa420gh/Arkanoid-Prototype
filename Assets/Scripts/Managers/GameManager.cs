@@ -11,6 +11,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private PauseManager pauseManager;
     [SerializeField] private UIManager uiManager;
+
+    [Header("Game Objects")] 
+    [SerializeField] private Ball ball;
     
     [Header("Dev Only")]
     [SerializeField] private bool isAutoPlayOn;
@@ -27,7 +30,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public bool IsAutoPlayOn => isAutoPlayOn;
 
     #endregion
-
+    
 
     #region Unity lifecycle
 
@@ -35,6 +38,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         RestoreLifes();
         BuckOffPoints();
+        UpdateAllUI();
     }
 
     private void OnEnable()
@@ -66,6 +70,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
 
     #endregion
+    
+
+    #region Public methods
+
+    public void RestartGame()
+    {
+        levelManager.OpenScene(1);
+        FindObjectOfType<Ball>().ResetBall();
+        uiManager.GameOverPanelVision(false);
+        uiManager.TopPanelVision(true);
+        UpdateAllUI();
+    }
+
+    #endregion
 
 
     #region Private methods
@@ -79,8 +97,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
         else
         {
-            uiManager.ShowGameOverPanel();
-            uiManager.UpdateTotalPointsLabel(TotalPoints);
+            GameOver();
         }
     }
 
@@ -94,6 +111,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         TotalPoints = 0;
         uiManager.UpdateTotalPointsLabel(TotalPoints);
+    }
+    
+    private void UpdateAllUI()
+    {
+        uiManager.UpdatePointsLabel(TotalPoints);
+        uiManager.UpdateLifePointsLabel(CurrentLifePoints);
+    }
+
+    private void GameOver()
+    {
+        pauseManager.TogglePause(true);
+        uiManager.PausePanelVision(false);
+        uiManager.TopPanelVision(false);
+        uiManager.UpdateTotalPointsLabel(TotalPoints);
+        uiManager.GameOverPanelVision(true);
     }
 
     #endregion
