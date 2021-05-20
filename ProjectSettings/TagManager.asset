@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ball
+  - FxTemporaire
+  - PickUp
+  - Pad
   layers:
   - Default
   - TransparentFX
