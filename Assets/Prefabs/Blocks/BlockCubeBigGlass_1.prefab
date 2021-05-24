@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38311dd0c1a62764b9450905b9b87d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDurability: 4
+  maxDurability: 3
   awardPoints: 10
   isInvisibleAtStart: 0
   pickUpsPrefabs:

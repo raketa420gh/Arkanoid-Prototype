@@ -8,7 +8,8 @@ public class UIManager : MonoBehaviour
     [Header("Texts")] 
     [SerializeField] private Text pointsText;
     [SerializeField] private Text livesText;
-    [SerializeField] private Text totalPointsText;
+    [SerializeField] private Text totalPointsGameOverText;
+    [SerializeField] private Text totalPointsWinText;
 
     [Header("Panels")]
     [SerializeField] private GameObject pausePanel;
@@ -16,7 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject topPanel;
     [SerializeField] private GameObject selectLevelPanel;
-    
+    [SerializeField] private GameObject winPanel;
+
     #endregion
 
 
@@ -27,6 +29,7 @@ public class UIManager : MonoBehaviour
         GameOverPanelVision(false);
         PausePanelVision(false);
         SelectLevelPanelVision(false);
+        WinPanelVision(false);
         TopPanelVision(true);
         MainMenuPanelVision(true);
     }
@@ -55,6 +58,11 @@ public class UIManager : MonoBehaviour
     {
         gameOverPanel.SetActive(isActive);
     }
+    
+    public void WinPanelVision(bool isActive)
+    {
+        winPanel.SetActive(isActive);
+    }
 
     public void PausePanelVision(bool isActive)
     {
@@ -82,7 +90,8 @@ public class UIManager : MonoBehaviour
 
     public void UpdateTotalPointsLabel(int totalPoints)
     {
-        totalPointsText.text = $"Всего заработано очков = {totalPoints}";
+        totalPointsGameOverText.text = $"Вы проиграли. Всего заработано очков = {totalPoints}";
+        totalPointsWinText.text = $"Победа! Всего заработано очков = {totalPoints}";
     }
 
     #endregion

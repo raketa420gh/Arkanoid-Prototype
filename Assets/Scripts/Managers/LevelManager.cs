@@ -17,6 +17,8 @@ public class LevelManager : MonoBehaviour
 
     public static event Action OnAllBlocksDestroyed;
 
+    public static event Action OnLastLevelCompleted;
+
     #endregion
 
 

@@ -136,6 +136,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         uiManager.TopPanelVision(false);
         uiManager.MainMenuPanelVision(false);
         uiManager.SelectLevelPanelVision(false);
+        uiManager.WinPanelVision(false);
     }
 
     #endregion
@@ -195,6 +196,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     private void LevelManagerOnAllBlocksDestroyed()
     {
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            CloseAllPanels();
+            uiManager.WinPanelVision(true);
+        }
+        
         levelManager.LoadNextScene();
     }
 
