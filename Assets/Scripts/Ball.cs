@@ -13,6 +13,28 @@ public class Ball : MonoBehaviour
     [SerializeField] private float speed;
     
     private bool isLaunched;
+    
+
+    #region Properties
+
+    public float Speed
+    {
+        get => speed;
+        private set => speed = value;
+    }
+
+    #endregion
+    
+
+    #endregion
+    
+
+    #region Public methods
+
+    public void ChangeSpeed(float speedFactor)
+    {
+        //rigidBody2D.velocity *= speedFactor;
+    }
 
     #endregion
 
@@ -74,7 +96,7 @@ public class Ball : MonoBehaviour
     private void LaunchBall()
     {
         Vector2 directionWithRandom = new Vector2(Random.Range(-0.5f, 0.5f), 1f).normalized;
-        Vector2 forceDirection = directionWithRandom * speed;
+        Vector2 forceDirection = directionWithRandom * Speed;
         rigidBody2D.AddForce(forceDirection);
         isLaunched = true;
     }

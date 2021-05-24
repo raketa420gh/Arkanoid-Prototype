@@ -3,4 +3,5 @@
     public const string Ball = "Ball";
     public const string Pad = "Pad";
     public const string PickUp = "PickUp";
+    public const string KillZone = "KillZone";
 }

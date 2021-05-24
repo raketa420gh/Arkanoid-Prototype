@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pad : MonoBehaviour
 {
@@ -53,6 +52,17 @@ public class Pad : MonoBehaviour
             padPosition.z = 0f;
             transform.position = padPosition;
         }
+    }
+
+    #endregion
+
+
+    #region Public methods
+
+    public void ChangePadWigth(float wigthFactor)
+    {
+        gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * wigthFactor,
+            gameObject.transform.localScale.y);
     }
 
     #endregion

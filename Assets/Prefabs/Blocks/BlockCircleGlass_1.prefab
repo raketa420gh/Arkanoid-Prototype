@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8280230841580041026}
   - component: {fileID: 8280230841580041031}
   - component: {fileID: 8280230841580041024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlockCircleGlass_1
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,5 +124,10 @@ MonoBehaviour:
   maxDurability: 2
   awardPoints: 3
   isInvisibleAtStart: 0
+  pickUpsPrefabs:
+  - {fileID: 4465574735560376092, guid: 47414229427ec51489b570f268d57671, type: 3}
+  - {fileID: 4465574735560376092, guid: bfa8eebe210cecf409b43bfb817abbac, type: 3}
+  - {fileID: 4465574735560376092, guid: a1446a131fc0b8a42af2754e1893c709, type: 3}
+  pickUpCreationRate: 30
   spriteRenderer: {fileID: 8280230841580041026}
   damagedSprite: {fileID: 21300000, guid: 106e4120d7bd2ad49b53b3c85cb5d121, type: 3}

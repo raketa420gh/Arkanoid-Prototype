@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8280230841580041026}
   - component: {fileID: -6795344456163209880}
   - component: {fileID: 8280230841580041024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlockTriangleGlass
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,5 +131,7 @@ MonoBehaviour:
   maxDurability: 2
   awardPoints: 3
   isInvisibleAtStart: 0
+  pickUpsPrefabs: []
+  pickUpCreationRate: 0
   spriteRenderer: {fileID: 8280230841580041026}
   damagedSprite: {fileID: 21300000, guid: bd3493886dd2cee4f91a3dfeae71a6d5, type: 3}

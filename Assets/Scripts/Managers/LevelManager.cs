@@ -75,8 +75,6 @@ public class LevelManager : MonoBehaviour
     private void BlockOnCreated()
     {
         allBlocksCount++;
-
-        Debug.Log($"Блок создан. На сцене {allBlocksCount} блоков");
     }
 
     private void BlockOnDestroyed(int awardPoints)
@@ -89,8 +87,6 @@ public class LevelManager : MonoBehaviour
             LoadNextScene();
             OnAllBlocksDestroyed?.Invoke();
         }
-
-        Debug.Log($"Блок уничтожен. На сцене {allBlocksCount} блоков");
     }
 
     #endregion

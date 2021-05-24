@@ -15,8 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject topPanel;
+    [SerializeField] private GameObject selectLevelPanel;
     
-
     #endregion
 
 
@@ -25,9 +25,10 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameOverPanelVision(false);
-        TopPanelVision(true);
         PausePanelVision(false);
-        
+        SelectLevelPanelVision(false);
+        TopPanelVision(true);
+        MainMenuPanelVision(true);
     }
 
     private void OnEnable()
@@ -59,10 +60,14 @@ public class UIManager : MonoBehaviour
     {
         pausePanel.SetActive(isActive);
     }
-
-    public void HideMainMenuPanel()
+    public void SelectLevelPanelVision(bool isActive)
     {
-        mainMenuPanel.SetActive(false);
+        selectLevelPanel.SetActive(isActive);
+    }
+
+    public void MainMenuPanelVision(bool isActive)
+    {
+        mainMenuPanel.SetActive(isActive);
     }
     
     public void UpdatePointsLabel(int points)

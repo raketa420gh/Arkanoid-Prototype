@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Block : MonoBehaviour
 {
@@ -7,9 +8,12 @@ public class Block : MonoBehaviour
 
     [Header("Settings")] 
     [SerializeField] [Min(0)] private int maxDurability;
-
     [SerializeField] [Min(0)] private int awardPoints;
     [SerializeField] private bool isInvisibleAtStart;
+
+    [Header("Pick Up Settings")] 
+    [SerializeField] private GameObject[] pickUpsPrefabs;
+    [Range(0, 100)] [SerializeField] private int pickUpCreationRate;
 
     [Header("Sprite Settings")] 
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -98,7 +102,19 @@ public class Block : MonoBehaviour
     private void DestroyBlock()
     {
         Destroy(gameObject);
+
+        if (IsNeedToCreatePickUp())
+        {
+            var randomPrefabNumber = Random.Range(0, pickUpsPrefabs.Length);
+            Instantiate(pickUpsPrefabs[randomPrefabNumber], transform.position, Quaternion.identity);
+        }
         OnDestroyed?.Invoke(awardPoints);
+    }
+
+    private bool IsNeedToCreatePickUp()
+    {
+        var randomNumber = Random.Range(1, 101);
+        return pickUpCreationRate >= randomNumber;
     }
 
     #endregion

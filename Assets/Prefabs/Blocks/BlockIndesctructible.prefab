@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8280230841580041026}
   - component: {fileID: 6282618001005355420}
   - component: {fileID: 5283350924655792498}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlockIndesctructible
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

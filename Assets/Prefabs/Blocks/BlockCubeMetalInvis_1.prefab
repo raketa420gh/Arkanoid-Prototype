@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6433885229734895343}
   - component: {fileID: 6433885229734895330}
   - component: {fileID: 6433885229734895341}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlockCubeMetalInvis_1
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,5 +124,7 @@ MonoBehaviour:
   maxDurability: 3
   awardPoints: 8
   isInvisibleAtStart: 1
+  pickUpsPrefabs: []
+  pickUpCreationRate: 0
   spriteRenderer: {fileID: 6433885229734895343}
   damagedSprite: {fileID: 21300000, guid: 1d89396994687534eba071028e447428, type: 3}

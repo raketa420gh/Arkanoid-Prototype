@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 4465574735560376097}
   - component: {fileID: 4465574735560376098}
   - component: {fileID: 4465574735560376099}
-  - component: {fileID: 7382313758442556715}
-  m_Layer: 0
-  m_Name: PickUpScore
-  m_TagString: Untagged
+  - component: {fileID: 4394329205809626874}
+  m_Layer: 11
+  m_Name: PickUpAddScore
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 32145113376ff8f49a7bd761f9267b8b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9012105, g: 0.9339623, b: 0.030838395, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0.0013955683, y: -0.036284536}
   serializedVersion: 2
   m_Radius: 0.207653
---- !u!114 &7382313758442556715
+--- !u!114 &4394329205809626874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4465574735560376092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f5ebe2c522002e47adfce670e85f1fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 149097d2264d28d409a30e701533f3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreToAdd: 100

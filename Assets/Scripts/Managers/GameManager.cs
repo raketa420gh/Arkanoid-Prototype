@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     #region Variables
-    
-    [Header("Game Settings")]
+
+    [Header("Game Settings")] 
     [SerializeField] private int maxLifes;
 
-    [Header("Other Managers")]
+    [Header("Other Managers")] 
     [SerializeField] private LevelManager levelManager;
+
     [SerializeField] private PauseManager pauseManager;
     [SerializeField] private UIManager uiManager;
 
-    [Header("Game Objects")] 
+    [Header("Game Objects")]
     [SerializeField] private Ball ball;
-    
-    [Header("Dev Only")]
+
+    [Header("Dev Only")] 
     [SerializeField] private bool isAutoPlayOn;
     [SerializeField] private bool isCheatsOn;
 
@@ -30,7 +32,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public bool IsAutoPlayOn => isAutoPlayOn;
 
     #endregion
-    
+
 
     #region Unity lifecycle
 
@@ -64,23 +66,76 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         if (Input.GetKeyDown(KeyCode.F) && (CurrentLifePoints < maxLifes))
         {
-            CurrentLifePoints++;
-            uiManager.UpdatePointsLabel(CurrentLifePoints);
+            AddCurrentLife();
         }
     }
 
     #endregion
-    
+
 
     #region Public methods
 
-    public void RestartGame()
+    public void AddTotalPoints(int addValue)
     {
-        levelManager.OpenScene(1);
+        TotalPoints += addValue;
+        uiManager.UpdateTotalPointsLabel(TotalPoints);
+    }
+
+    public void ReduceTotalPoints(int reduceValue)
+    {
+        TotalPoints -= reduceValue;
+
+        if (TotalPoints <= 0)
+        {
+            TotalPoints = 0;
+        }
+
+        uiManager.UpdateTotalPointsLabel(TotalPoints);
+        Debug.Log($"Вы потеряли {reduceValue} очков");
+    }
+
+    public void RestartLevel()
+    {
+        levelManager.OpenScene(SceneManager.GetActiveScene().buildIndex);
         FindObjectOfType<Ball>().ResetBall();
-        uiManager.GameOverPanelVision(false);
+        CloseAllPanels();
         uiManager.TopPanelVision(true);
+        RestoreLifes();
+        BuckOffPoints();
         UpdateAllUI();
+    }
+
+    public void OpenMainMenu()
+    {
+        levelManager.OpenScene(0);
+        CloseAllPanels();
+        uiManager.MainMenuPanelVision(true);
+        RestoreLifes();
+        BuckOffPoints();
+        UpdateAllUI();
+    }
+
+    public void AddCurrentLife()
+    {
+        if (CurrentLifePoints < maxLifes)
+        {
+            CurrentLifePoints++;
+            uiManager.UpdatePointsLabel(CurrentLifePoints);
+        }
+        else
+        {
+            CurrentLifePoints = maxLifes;
+            uiManager.UpdatePointsLabel(CurrentLifePoints);
+        }
+    }
+
+    public void CloseAllPanels()
+    {
+        uiManager.GameOverPanelVision(false);
+        uiManager.PausePanelVision(false);
+        uiManager.TopPanelVision(false);
+        uiManager.MainMenuPanelVision(false);
+        uiManager.SelectLevelPanelVision(false);
     }
 
     #endregion
@@ -94,6 +149,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             CurrentLifePoints--;
             uiManager.UpdateLifePointsLabel(CurrentLifePoints);
+            Debug.Log($"Вы потеряли жизнь. Осталось {CurrentLifePoints}");
         }
         else
         {
@@ -112,7 +168,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         TotalPoints = 0;
         uiManager.UpdateTotalPointsLabel(TotalPoints);
     }
-    
+
     private void UpdateAllUI()
     {
         uiManager.UpdatePointsLabel(TotalPoints);
@@ -122,8 +178,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void GameOver()
     {
         pauseManager.TogglePause(true);
-        uiManager.PausePanelVision(false);
-        uiManager.TopPanelVision(false);
+        CloseAllPanels();
         uiManager.UpdateTotalPointsLabel(TotalPoints);
         uiManager.GameOverPanelVision(true);
     }

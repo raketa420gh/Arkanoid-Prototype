@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6433885229734895343}
   - component: {fileID: 7758762471146346548}
   - component: {fileID: 6433885229734895341}
-  m_Layer: 0
+  - component: {fileID: 3256490796103913224}
+  m_Layer: 8
   m_Name: BlockCubeBigGlass_1
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,5 +125,23 @@ MonoBehaviour:
   maxDurability: 4
   awardPoints: 10
   isInvisibleAtStart: 0
+  pickUpsPrefabs:
+  - {fileID: 4465574735560376092, guid: 5cbce1ad5dac94e428399b4da9150740, type: 3}
+  - {fileID: 4465574735560376092, guid: 14e3369e1d9719b45a38439650e829f7, type: 3}
+  - {fileID: 4465574735560376092, guid: d4d39c996bae33d41a8390bf52621827, type: 3}
+  pickUpCreationRate: 90
   spriteRenderer: {fileID: 6433885229734895343}
   damagedSprite: {fileID: 21300000, guid: 960f1b7aafef624439a3bb9c6764c66b, type: 3}
+--- !u!114 &3256490796103913224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433885229734895342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f813b05c84af474384ccf7f49b8088d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedFactor: 1.5

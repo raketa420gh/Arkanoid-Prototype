@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4567872138896085940}
   - component: {fileID: 4567872138896085942}
   - component: {fileID: 3609993498001105281}
-  m_Layer: 0
+  - component: {fileID: 3154007126348651094}
+  m_Layer: 9
   m_Name: Pad
   m_TagString: Pad
   m_Icon: {fileID: 0}
@@ -108,6 +109,30 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -1.6, y: -0.4}
+  - {x: 1.6, y: -0.4}
+  - {x: 1.6, y: 0.35}
+  - {x: 1.5, y: 0.5}
+  - {x: 0, y: 0.525}
+  - {x: -1.5, y: 0.5}
+  - {x: -1.6, y: 0.35}
+  - {x: -1.6, y: -0.4}
+--- !u!68 &3154007126348651094
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4567872138896085962}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
