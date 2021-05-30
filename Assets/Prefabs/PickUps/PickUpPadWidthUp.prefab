@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4465574735560376097}
   - component: {fileID: 4465574735560376098}
   - component: {fileID: 4465574735560376099}
-  - component: {fileID: -7953973413385221580}
+  - component: {fileID: -5998874041300320473}
   m_Layer: 11
-  m_Name: PickUpBallScale
+  m_Name: PickUpPadWidthUp
   m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c5210a0f40cee2f4698c69ff0dcaf993, type: 3}
-  m_Color: {r: 0.9339623, g: 0.022027409, b: 0.7156904, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.018348932, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0.0013955683, y: -0.036284536}
   serializedVersion: 2
   m_Radius: 0.207653
---- !u!114 &-7953973413385221580
+--- !u!114 &-5998874041300320473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4465574735560376092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 041da15ac1a1f1a418e972fb6abec73c, type: 3}
+  m_Script: {fileID: 11500000, guid: b43581a20fdb9cb4eac1141ab5324f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "scale\u0421oefficient": 1.5
+  widthFactor: 1.2

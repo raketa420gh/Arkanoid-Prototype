@@ -96,7 +96,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void RestartLevel()
     {
-        levelManager.OpenScene(SceneManager.GetActiveScene().buildIndex);
+        levelManager.OpenScene(1);
         FindObjectOfType<Ball>().ResetBall();
         CloseAllPanels();
         uiManager.TopPanelVision(true);

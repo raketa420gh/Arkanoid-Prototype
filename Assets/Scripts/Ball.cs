@@ -1,50 +1,47 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Ball : MonoBehaviour
 {
     #region Variables
-    
-    [Header("Components")]
+
+    [Header("Components")] 
     [SerializeField] private Rigidbody2D rigidBody2D;
-    [SerializeField] private Transform padTransform;
-    
-    [Header("Ball Settings")]
+
+    [Header("Ball Settings")] 
     [SerializeField] private float speed;
     
+    private Transform padTransform;
     private bool isLaunched;
+    private Vector2 padOffset;
     
-
-    #region Properties
-
-    public float Speed
-    {
-        get => speed;
-        private set => speed = value;
-    }
-
     #endregion
-    
 
-    #endregion
-    
 
-    #region Public methods
+    #region Events
 
-    public void ChangeSpeed(float speedFactor)
-    {
-        //rigidBody2D.velocity *= speedFactor;
-    }
+    public static event Action<Ball> OnCreated;
+    public static event Action<Ball> OnDestroyed;
 
     #endregion
 
 
     #region Unity lifecycle
 
+    private void Awake()
+    {
+        padTransform = FindObjectOfType<Pad>().transform;
+        
+        CenterWithPad();
+        CalculatePadOffset();
+        OnCreated?.Invoke(this);
+    }
+
     private void Start()
     {
         ResetBall();
-        
+
         if (GameManager.Instance.IsAutoPlayOn)
         {
             LaunchBall();
@@ -65,10 +62,8 @@ public class Ball : MonoBehaviour
     {
         if (!isLaunched)
         {
-            Vector3 padPosition = padTransform.position;
-            padPosition.y = transform.position.y;
-            transform.position = padPosition;
-
+            MoveWithPad();
+            
             if (Input.GetMouseButtonDown(0))
             {
                 LaunchBall();
@@ -76,10 +71,23 @@ public class Ball : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        OnDestroyed?.Invoke(this);
+    }
+
     #endregion
 
 
     #region Public methods
+
+    public void LaunchBall()
+    {
+        Vector2 directionWithRandom = new Vector2(Random.Range(-0.5f, 0.5f), 1f).normalized;
+        Vector2 forceDirection = directionWithRandom * speed;
+        rigidBody2D.AddForce(forceDirection);
+        isLaunched = true;
+    }
 
     public void ResetBall()
     {
@@ -87,18 +95,39 @@ public class Ball : MonoBehaviour
         rigidBody2D.velocity = Vector2.zero;
         isLaunched = false;
     }
+    
+    public void Stick()
+    {
+        isLaunched = false;
+        rigidBody2D.velocity = Vector2.zero;
+        
+        CalculatePadOffset();
+    }
 
     #endregion
 
 
     #region Private methods
-    
-    private void LaunchBall()
+
+    private void MoveWithPad()
     {
-        Vector2 directionWithRandom = new Vector2(Random.Range(-0.5f, 0.5f), 1f).normalized;
-        Vector2 forceDirection = directionWithRandom * Speed;
-        rigidBody2D.AddForce(forceDirection);
-        isLaunched = true;
+        Vector2 padPosition = padTransform.position;
+        padPosition -= padOffset;
+        
+        transform.position = padPosition;
+    }
+
+    private void CalculatePadOffset()
+    {
+        padOffset = padTransform.position - transform.position;
+    }
+
+    private void CenterWithPad()
+    {
+        var padPosition = padTransform.position;
+        padPosition.y = transform.position.y;
+
+        transform.position = padPosition;
     }
 
     #endregion

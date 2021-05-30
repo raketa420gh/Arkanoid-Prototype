@@ -125,11 +125,8 @@ MonoBehaviour:
   maxDurability: 3
   awardPoints: 10
   isInvisibleAtStart: 0
-  pickUpsPrefabs:
-  - {fileID: 4465574735560376092, guid: 5cbce1ad5dac94e428399b4da9150740, type: 3}
-  - {fileID: 4465574735560376092, guid: 14e3369e1d9719b45a38439650e829f7, type: 3}
-  - {fileID: 4465574735560376092, guid: d4d39c996bae33d41a8390bf52621827, type: 3}
-  pickUpCreationRate: 90
+  pickUpsPrefabs: []
+  pickUpCreationRate: 0
   spriteRenderer: {fileID: 6433885229734895343}
   damagedSprite: {fileID: 21300000, guid: 960f1b7aafef624439a3bb9c6764c66b, type: 3}
 --- !u!114 &3256490796103913224

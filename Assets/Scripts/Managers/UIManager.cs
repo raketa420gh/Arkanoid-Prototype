@@ -31,7 +31,6 @@ public class UIManager : MonoBehaviour
         SelectLevelPanelVision(false);
         WinPanelVision(false);
         TopPanelVision(true);
-        MainMenuPanelVision(true);
     }
 
     private void OnEnable()

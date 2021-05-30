@@ -5,19 +5,7 @@ public class PickUpBallSpeed : PickUpBase
     #region Variables
 
     [SerializeField] private float speedFactor;
-        
-    private Ball ball;
-
-    #endregion
-
-
-    #region Unity lifecycle
-
-    private void Awake()
-    {
-        ball = FindObjectOfType<Ball>();
-    }
-
+    
     #endregion
 
 
@@ -25,8 +13,7 @@ public class PickUpBallSpeed : PickUpBase
 
     protected override void ApplyEffect()
     {
-        ball.ChangeSpeed(speedFactor);
-        Debug.Log($"Скорость мяча изменена. Теперь она {ball.Speed}");
+        Debug.Log($"Скорость мяча изменена.");
     }
 
     #endregion

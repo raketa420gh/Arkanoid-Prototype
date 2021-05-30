@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Pad : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Pad : MonoBehaviour
     [SerializeField] private float maxX;
 
     private bool isControlOn;
+    private bool isSticky = false;
     private Ball ball;
 
     #endregion
@@ -54,6 +56,15 @@ public class Pad : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isSticky && collision.gameObject.CompareTag(Tags.Ball))
+        {
+            var ball = collision.gameObject.GetComponent<Ball>();
+            ball.Stick();
+        }
+    }
+
     #endregion
 
 
@@ -63,6 +74,11 @@ public class Pad : MonoBehaviour
     {
         gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * wigthFactor,
             gameObject.transform.localScale.y);
+    }
+    
+    public void ApplyStickiness()
+    {
+        isSticky = true;
     }
 
     #endregion

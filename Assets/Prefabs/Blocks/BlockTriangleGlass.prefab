@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDurability: 2
-  awardPoints: 3
+  awardPoints: 4
   isInvisibleAtStart: 0
   pickUpsPrefabs: []
   pickUpCreationRate: 0
