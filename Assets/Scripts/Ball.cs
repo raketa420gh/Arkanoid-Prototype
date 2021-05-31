@@ -42,7 +42,7 @@ public class Ball : MonoBehaviour
     {
         ResetBall();
 
-        if (GameManager.Instance.IsAutoPlayOn)
+        if (IsNeedLaunchBall())
         {
             LaunchBall();
         }
@@ -64,7 +64,7 @@ public class Ball : MonoBehaviour
         {
             MoveWithPad();
             
-            if (Input.GetMouseButtonDown(0))
+            if (IsNeedLaunchBall())
             {
                 LaunchBall();
             }
@@ -108,6 +108,11 @@ public class Ball : MonoBehaviour
 
 
     #region Private methods
+
+    private bool IsNeedLaunchBall()
+    {
+        return Input.GetMouseButtonDown(0) || GameManager.Instance.IsAutoPlayOn;
+    }
 
     private void MoveWithPad()
     {
