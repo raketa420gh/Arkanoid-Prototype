@@ -8,11 +8,11 @@ public class Ball : MonoBehaviour
 
     [Header("Components")] 
     [SerializeField] private Rigidbody2D rigidBody2D;
-
-    [Header("Ball Settings")] 
+    [SerializeField] private Transform padTransform;
+    
+    [Header("Ball Settings")]
     [SerializeField] private float speed;
     
-    private Transform padTransform;
     private bool isLaunched;
     private Vector2 padOffset;
     
@@ -31,8 +31,6 @@ public class Ball : MonoBehaviour
 
     private void Awake()
     {
-        padTransform = FindObjectOfType<Pad>().transform;
-        
         CenterWithPad();
         CalculatePadOffset();
         OnCreated?.Invoke(this);
